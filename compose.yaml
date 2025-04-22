@@ -1,0 +1,22 @@
+version: "3.9"
+
+services:
+  mail:
+    build:
+      context: .
+    container_name: postfix-container
+    restart: unless-stopped
+    environment:
+      MAIL_HOSTNAME: ${MAIL_HOSTNAME}
+      MAIL_DOMAIN: ${MAIL_DOMAIN}
+    ports:
+      - "25:25"
+    volumes:
+      - ./postfix:/etc/postfix
+      - ./dovecot:/etc/dovecot
+      - ./maildata:/var/spool/postfix
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "10m"
+        max-file: "3"
