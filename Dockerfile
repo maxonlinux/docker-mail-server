@@ -23,4 +23,4 @@ VOLUME ["/var/spool/postfix", "/etc/postfix", "/etc/dovecot"]
 
 ENTRYPOINT ["/entrypoint.sh"]
 
-CMD ["postfix", "-v", "start-fg"]
+CMD cp /etc/resolv.conf /var/spool/postfix/etc/resolv.conf && postfix start-fg
